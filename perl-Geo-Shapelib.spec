@@ -6,7 +6,7 @@ Name:		perl-Geo-Shapelib
 Version:	0.20
 Release:	%mkrel 1
 License:	GPL
-Group:		Development/Languages/Perl
+Group:		Development/Perl
 Source0:	http://www.cpan.org/modules/by-module/Geo/%{pdir}-%{pnam}-%{version}.tar.gz
 URL:		http://search.cpan.org/dist/Geo-Shapelib/
 BuildRequires:	perl-devel >= 1:5.8.0
