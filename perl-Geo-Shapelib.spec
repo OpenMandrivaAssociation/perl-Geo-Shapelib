@@ -1,14 +1,14 @@
 %define upstream_name		Geo-Shapelib
-%define upstream_version	0.20
+%define upstream_version	0.22
 
 Summary:	Perl extension for reading and writing shapefiles as defined by ESRI(r)
 Name:		perl-%{upstream_name}
-Version:	%perl_convert_version %{upstream_version}
-Release:	4
+Version:	%{upstream_version}
+Release:	1
 License:	GPL+ or Artistic
 Group:		Development/Perl
-Url:		https://search.cpan.org/dist/%{upstream_name}
-Source0:	http://www.cpan.org/modules/by-module/Geo/%{upstream_name}-%{upstream_version}.tar.gz
+Url:		https://github.com/ajolma/Geo-Shapelib
+Source0:	https://cpan.metacpan.org/authors/id/A/AJ/AJOLMA/Geo-Shapelib-%{upstream_version}.tar.gz
 BuildRequires:	make
 BuildRequires:	perl(Tree::R)
 BuildRequires:	perl-devel
