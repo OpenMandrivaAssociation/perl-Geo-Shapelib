@@ -1,14 +1,12 @@
 %define upstream_name		Geo-Shapelib
-%define upstream_version	0.22
-
 Summary:	Perl extension for reading and writing shapefiles as defined by ESRI(r)
 Name:		perl-%{upstream_name}
-Version:	%{upstream_version}
-Release:	1
+Version:	0.22
+Release:	2
 License:	GPL+ or Artistic
 Group:		Development/Perl
 Url:		https://github.com/ajolma/Geo-Shapelib
-Source0:	https://cpan.metacpan.org/authors/id/A/AJ/AJOLMA/Geo-Shapelib-%{upstream_version}.tar.gz
+Source0:	https://cpan.metacpan.org/authors/id/A/AJ/AJOLMA/Geo-Shapelib-%{version}.tar.gz
 BuildRequires:	make
 BuildRequires:	perl(Tree::R)
 BuildRequires:	perl-devel
@@ -21,7 +19,7 @@ Shapefile C Library (http://shapelib.maptools.org/). The library is
 included in this distribution.
 
 %prep
-%setup -q -n %{upstream_name}-%{upstream_version}
+%setup -q -n %{upstream_name}-%{version}
 
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor
