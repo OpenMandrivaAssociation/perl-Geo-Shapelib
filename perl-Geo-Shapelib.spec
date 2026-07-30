@@ -3,7 +3,7 @@
 Summary:	Perl extension for reading and writing shapefiles as defined by ESRI(r)
 Name:		perl-%{upstream_name}
 Version:	0.22
-Release:	1
+Release:	2
 License:	GPL+ or Artistic
 Group:		Development/Perl
 Url:		https://github.com/ajolma/Geo-Shapelib
@@ -20,7 +20,7 @@ Shapefile C Library (http://shapelib.maptools.org/). The library is
 included in this distribution.
 
 %prep
-%setup -q -n %{upstream_name}-%{version}
+%setup -q -n Geo-Shapelib-0.22
 
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor
@@ -33,8 +33,6 @@ rm -rf %{buildroot}
 # we don't want this
 find %{buildroot} -name "*.a" -exec rm -rf {} \;
 
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-, root, root)
