@@ -3,7 +3,7 @@
 Summary:	Perl extension for reading and writing shapefiles as defined by ESRI(r)
 Name:		perl-%{upstream_name}
 Version:	0.22
-Release:	10
+Release:	11
 License:	GPL+ or Artistic
 Group:		Development/Perl
 Url:		https://github.com/ajolma/Geo-Shapelib
