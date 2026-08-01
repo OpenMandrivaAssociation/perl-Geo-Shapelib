@@ -3,7 +3,7 @@
 Summary:	Perl extension for reading and writing shapefiles as defined by ESRI(r)
 Name:		perl-%{upstream_name}
 Version:	0.22
-Release:	50
+Release:	51
 License:	GPL+ or Artistic
 Group:		Development/Perl
 Url:		https://github.com/ajolma/Geo-Shapelib
@@ -24,9 +24,26 @@ included in this distribution.
 %setup -q -n Geo-Shapelib-0.22
 
 %build
-perl Makefile.PL INSTALLDIRS=vendor --shapelib=%{_libdir}/libshp.so
+# Makefile.PL needs a real libshp.so path (not only -lshp); headers live under include/libshp
+libdir=$(pkg-config --variable=libdir shapelib 2>/dev/null || echo %{_libdir})
+libshp=
+for c in "$libdir/libshp.so" "%{_libdir}/libshp.so" "$libdir/libshp.so.1" "$libdir/libshp.so.4"; do
+	if [ -e "$c" ]; then libshp=$c; break; fi
+done
+if [ -z "$libshp" ]; then
+	libshp=$(ls "$libdir"/libshp.so* "%{_libdir}"/libshp.so* 2>/dev/null | head -1 || true)
+fi
+if [ -z "$libshp" ] || [ ! -e "$libshp" ]; then
+	echo "ERROR: libshp.so not found (pkgconfig shapelib libdir=$libdir)" >&2
+	pkg-config --libs --cflags shapelib || true
+	ls -la "$libdir"/libshp* "%{_libdir}"/libshp* 2>/dev/null || true
+	exit 1
+fi
+export PERL_SHAPELIB="$libshp"
+echo "Using PERL_SHAPELIB=$PERL_SHAPELIB"
+perl Makefile.PL INSTALLDIRS=vendor
 # headers are under %{_includedir}/libshp (Makefile.PL used libdir as -I)
-sed -i "s|-I%{_libdir}|-I%{_includedir}/libshp|" Makefile || :
+sed -i "s|-I${libdir}|-I%{_includedir}/libshp|g; s|-I%{_libdir}|-I%{_includedir}/libshp|g" Makefile || :
 %make_build
 %check
 make test || :
